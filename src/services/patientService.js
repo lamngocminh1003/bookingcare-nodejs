@@ -21,14 +21,9 @@ let postPatientBookAppointment =(data)=>{
                 })
                 //create a booking record
                 if(user && user[0]){
-                    let { Op } = require("sequelize");
                     await db.Booking.findOrCreate({
                         where:{
-                            [Op.or]: [
-                            {timeType:data.timeType},
-                            {doctorId:data.doctorId},
-                            {date:data.date},
-                        ]
+                            patientId:user[0].id
                         },
                         defaults:{
                             statusId: 'S1',
