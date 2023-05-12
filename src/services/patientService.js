@@ -15,7 +15,8 @@ let postPatientBookAppointment =(data)=>{
                     receiverEmail:data.email,
                     patientName:data.fullName,
                     time:data.timeString,
-                    doctorName:'Trần Ánh',
+                    doctorName:data.doctorName,
+                    language:data.language,
                     redirectLink:'https://www.facebook.com/profile.php?id=100027366979129',
                 })
                 //upsert patient
