@@ -37,12 +37,12 @@ let getAllSpecialties =()=>{
             let specialties = await db.Specialty.findAll({
                 raw: true
             })
-            if(specialties && specialties.length>0){
-                specialties.map(item => {
-                    item.image = new Buffer(item.image,'base64').toString('binary');
-                    return item
-                })
-            }
+            // if(specialties && specialties.length>0){
+            //     specialties.map(item => {
+            //         item.image = new Buffer(item.image,'base64').toString('binary');
+            //         return item
+            //     })
+            // }
             if(!specialties) specialties = {};
             resolve({
                 errCode:0,
