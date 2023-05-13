@@ -35,15 +35,19 @@ let getAllSpecialties =()=>{
     return new Promise(async(resolve, reject)=>{
         try {
             let specialties = await db.Specialty.findAll({
-                raw:true,
+                raw: true
             })
-            if(specialties && specialties.image){
-                data.image = new Buffer(data.image,'base64').toString('binary');
+            if(specialties && specialties.length>0){
+                specialties.map(item => {
+                    item.image = new Buffer(item.image,'base64').toString('binary');
+                    return item
+                })
             }
             if(!specialties) specialties = {};
             resolve({
                 errCode:0,
-                data:specialties
+                errMessage:'ok',
+                specialties
             })
         } catch (e) {
             reject(e)
