@@ -112,10 +112,10 @@ let updateClinicData = (data) => {
         }
     })
 }
-let getDetailClinicById = (inputId,location) =>{
+let getDetailClinicById = (inputId) =>{
     return new Promise(async(resolve, reject) =>{
         try {
-            if(!inputId || !location){
+            if(!inputId ){
                 resolve({
                     errCode:1,
                     errMessage:'Missing parameter'
@@ -125,24 +125,18 @@ let getDetailClinicById = (inputId,location) =>{
                         where:{
                             id:inputId
                         }, 
-                        attributes:['descriptionHTML','descriptionMarkdown']
+                        attributes:['name','image','address','descriptionHTML','descriptionMarkdown']
                     })
+                    if(data && data.image){
+                        data.image = new Buffer(data.image,'base64').toString('binary');
+                    }
+                    
                     if(data){
                         let doctorClinic =[]
-                        if(location ==='ALL'){
                             doctorClinic = await db.Doctor_Info.findAll({
                                 where:{clinicId:inputId},
                                 attributes:['doctorId','provinceId']
                             })
-                        }else{
-                            doctorClinic = await db.Doctor_Info.findAll({
-                                where:{
-                                    clinicId:inputId,
-                                    provinceId:location
-                                },
-                                attributes:['doctorId','provinceId']
-                            })
-                        }
                         data.doctorClinic= doctorClinic
                     }else data = {}
                     resolve({

@@ -43,7 +43,7 @@ let handleEditClinic = async(req,res) => {
 
 let getDetailClinicById =async (req,res) =>{
     try {
-        let info = await clinicService.getDetailClinicById(req.query.id, req.query.location);
+        let info = await clinicService.getDetailClinicById(req.query.id);
         return res.status(200).json(info)
     } catch (e) {
         console.log(e);
