@@ -11,7 +11,8 @@ let buildUrlEmail = (doctorId,token) =>{
 let postPatientBookAppointment =(data)=>{
     return new Promise(async(resolve, reject)=>{
         try {
-            if(!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName){
+            if(!data.email || !data.doctorId || !data.timeType || !data.date || !data.lastName || !data.firstName 
+                ||!data.selectedGender || !data.address || !data.phoneNumber) {
                 resolve({
                     errCode:1,
                     errMessage:'Missing parameter'
@@ -20,7 +21,7 @@ let postPatientBookAppointment =(data)=>{
                 let token = uuidv4();
                 await emailService.sendSimpleEmail({
                     receiverEmail:data.email,
-                    patientName:data.fullName,
+                    patientName:data.firstName,
                     time:data.timeString,
                     doctorName:data.doctorName,
                     language:data.language,
@@ -30,7 +31,12 @@ let postPatientBookAppointment =(data)=>{
                 let user = await db.User.findOrCreate({
                     where:{email:data.email},
                     defaults:{
+                        lastName:data.lastName,
+                        firstName:data.firstName,
+                        address:data.address,
+                        phoneNumber:data.phoneNumber,
                         email:data.email,
+                        gender:data.selectedGender,
                         roleId:'R3'
                     },
                 })
