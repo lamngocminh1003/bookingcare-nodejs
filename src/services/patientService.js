@@ -12,7 +12,7 @@ let postPatientBookAppointment =(data)=>{
     return new Promise(async(resolve, reject)=>{
         try {
             if(!data.email || !data.doctorId || !data.timeType || !data.date || !data.lastName || !data.firstName 
-                ||!data.selectedGender || !data.address || !data.phoneNumber) {
+                ||!data.selectedGender || !data.address || !data.phoneNumber || !data.reason) {
                 resolve({
                     errCode:1,
                     errMessage:'Missing parameter'
@@ -33,6 +33,7 @@ let postPatientBookAppointment =(data)=>{
                     defaults:{
                         lastName:data.lastName,
                         firstName:data.firstName,
+                        reason:data.reason,
                         address:data.address,
                         phoneNumber:data.phoneNumber,
                         email:data.email,

@@ -374,10 +374,13 @@ let getListPatientsForDoctor =(doctorId,date)=>{
                         },include:[
                             {
                                 model: db.User, as:'patientData',
-                                attributes:['email','phoneNumber','lastName','firstName','gender'],
+                                attributes:['email','phoneNumber','lastName','firstName','gender','address','reason'],
                                 include:[
                                     {model: db.Allcode, as:'genderData',attributes:['valueEn','valueVi']},
-                                ]}
+                                ]},
+                                {
+                                    model: db.Allcode, as:'timeTypeDataPatient',attributes:['valueEn','valueVi']
+                                }
                                 
                             ],
                                 raw:false,

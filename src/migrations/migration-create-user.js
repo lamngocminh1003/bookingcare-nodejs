@@ -32,6 +32,9 @@ module.exports = {
       image: {
         type: Sequelize.STRING
       },
+      reason: {
+        type: Sequelize.TEXT
+      },
       roleId: {
         type: Sequelize.STRING
       },
